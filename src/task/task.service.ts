@@ -46,7 +46,7 @@ export class TaskService {
         taskId: number,
         dto: EditTaskDto,
     ){
-        // get the bookmark by id
+        // get the task by id
     const task =
     await this.prisma.task.findUnique({
       where: {
@@ -54,7 +54,7 @@ export class TaskService {
       },
     });
 
-  // check if user owns the bookmark
+  // check if user owns the task
   if (!task || task.userId !== userId)
     throw new ForbiddenException(
       'Access to resources denied',
@@ -83,7 +83,7 @@ export class TaskService {
         },
       });
 
-    // check if user owns the bookmark
+    // check if user owns the task
     if (!task || task.userId !== userId)
       throw new ForbiddenException(
         'Access to resources denied',
