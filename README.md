@@ -26,6 +26,13 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Setting Up
+
+```docker
+# you need a running docker engine
+# create a .env file at the root-- should have variables; JWT_SECRET and DATABASE_URL
+```
+
 ## Installation
 
 ```bash
