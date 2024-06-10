@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { EditTaskDto, CreateTaskDto  } from './dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { Prisma } from '@prisma/client';  // Import Prisma types
 
 @Injectable()
 export class TaskService {
@@ -60,13 +61,23 @@ export class TaskService {
       'Access to resources denied',
     );
 
+    const { description, completed } = dto;
+
+    const updateData: Prisma.TaskUpdateInput = {};
+
+    if (description !== undefined) {
+      updateData.description = description;
+    }
+
+    if (completed !== undefined) {
+      updateData.completed = { set: completed };
+    }
+
   return this.prisma.task.update({
     where: {
       id: taskId,
     },
-    data: {
-      ...dto,
-    },
+    data: updateData,
   });
 
     }
